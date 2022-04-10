@@ -1,8 +1,16 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
-const themeSchema = new mongoose.Schema({
-    themeName: {
+const photoSchema = new mongoose.Schema({
+    photoTitle: {
+        type: String,
+        required: true
+    },
+    photoUrl: {
+        type: String,
+        required: true
+    },
+    photoExif: {
         type: String,
         required: true
     },
@@ -20,4 +28,4 @@ const themeSchema = new mongoose.Schema({
     }],
 }, { timestamps: { createdAt: 'created_at' } });
 
-module.exports = mongoose.model('Theme', themeSchema);
+module.exports = mongoose.model('Photo', photoSchema);

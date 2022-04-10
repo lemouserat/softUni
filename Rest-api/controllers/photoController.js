@@ -1,8 +1,8 @@
-const { themeModel } = require('../models');
+const { photoModel } = require('../models');
 const { newPost } = require('./postController')
 
-function getThemes(req, res, next) {
-    themeModel.find()
+function getPhotos(req, res, next) {
+    photoModel.find()
         .populate('userId')
         .then(themes => res.json(themes))
         .catch(next);
@@ -11,7 +11,7 @@ function getThemes(req, res, next) {
 function getTheme(req, res, next) {
     const { themeId } = req.params;
 
-    themeModel.findById(themeId)
+    photoModel.findById(themeId)
         .populate({
             path : 'posts',
             populate : {
@@ -22,11 +22,11 @@ function getTheme(req, res, next) {
         .catch(next);
 }
 
-function createTheme(req, res, next) {
+function addPhoto(req, res, next) {
     const { themeName, postText } = req.body;
     const { _id: userId } = req.user;
 
-    themeModel.create({ themeName, userId, subscribers: [userId] })
+    photoModel.create({ themeName, userId, subscribers: [userId] })
         .then(theme => {
             newPost(postText, userId, theme._id)
                 .then(([_, updatedTheme]) => res.status(200).json(updatedTheme))
@@ -37,7 +37,7 @@ function createTheme(req, res, next) {
 function subscribe(req, res, next) {
     const themeId = req.params.themeId;
     const { _id: userId } = req.user;
-    themeModel.findByIdAndUpdate({ _id: themeId }, { $addToSet: { subscribers: userId } }, { new: true })
+    photoModel.findByIdAndUpdate({ _id: themeId }, { $addToSet: { subscribers: userId } }, { new: true })
         .then(updatedTheme => {
             res.status(200).json(updatedTheme)
         })
@@ -45,8 +45,8 @@ function subscribe(req, res, next) {
 }
 
 module.exports = {
-    getThemes,
-    createTheme,
+    getPhotos,
+    addPhoto,
     getTheme,
     subscribe,
 }

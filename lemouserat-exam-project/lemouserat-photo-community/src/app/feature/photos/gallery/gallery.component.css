@@ -1,8 +1,6 @@
 :host {
     display: flex;
     justify-content: space-around;
-    width: 100%;
-    
   }
   
   main {
@@ -14,4 +12,3 @@
     margin-top: 1em;
     font-size: 0.8em;
   }
-  
