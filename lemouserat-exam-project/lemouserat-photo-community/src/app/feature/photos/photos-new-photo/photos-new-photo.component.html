@@ -2,11 +2,10 @@
     <div class="header-background">
         <span>Add new photo</span>
     </div>
-
     <form >
         <div class="new-photo-title">
-            <label for="themeName">Title <span class="red">*</span></label>
-            <input  ngModel type="text" name="themeName" id="themeName" required minlength="5">
+            <label for="photoTitle">Title <span class="red">*</span></label>
+            <input  ngModel type="text" name="photoTitle" id="photoTitle" required minlength="5">
 
             <ng-container >
                 <p >
@@ -19,8 +18,8 @@
 
         </div>
         <div class="new-photo-url">
-            <label for="themeName">URL <span class="red">*</span></label>
-            <input  ngModel type="text" name="themeName" id="themeName" required minlength="5">
+            <label for="photoUrl">URL <span class="red">*</span></label>
+            <input  ngModel type="text" name="photoUrl" id="photoUrl" required minlength="5">
 
             <ng-container >
                 <p >
@@ -33,8 +32,8 @@
 
         </div>
         <div class="new-theme-content">
-            <label for="postText">EXIF information <span class="red">*</span></label>
-            <textarea type="text" name="postText" ngModel id="postText" rows="8" class="height" required minlength="10"></textarea>
+            <label for="photoExif">EXIF information <span class="red">*</span></label>
+            <textarea type="text" name="photoExif" ngModel id="photoExif" rows="8" class="height" required minlength="10"></textarea>
             <ng-container >
                 <p >
                     The field with your post is required.

@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GalleryComponent } from './gallery/gallery.component';
-import { FormsModule } from '@angular/forms';
-import { PhotoListComponent } from './photo-list/photo-list.component';
+import { PhotosPageComponent } from './photos-page/photos-page.component';
+import { PhotosListComponent } from './photos-list/photos-list.component';
+import { PhotosNewPhotoComponent } from './photos-new-photo/photos-new-photo.component';
 import { PhotoItemComponent } from './photo-item/photo-item.component';
+
 
 
 @NgModule({
   declarations: [
-      GalleryComponent,
-      PhotoListComponent,
-      PhotoItemComponent
+    PhotosPageComponent,
+    PhotosListComponent,
+    PhotosNewPhotoComponent,
+    PhotoItemComponent
   ],
   imports: [
-      CommonModule,
-      FormsModule,
-
-
-  ], exports: [
-
+    CommonModule
   ]
 })
 export class PhotosModule { }

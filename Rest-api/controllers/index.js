@@ -1,5 +1,5 @@
 const authController = require('./auth');
-const themeController = require('./photoController');
+const photoController = require('./photoController');
 const postController = require('./postController');
 
 module.exports = {
