@@ -14,7 +14,6 @@ const photoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    /*
     subscribers: [{
         type: ObjectId,
         ref: "User"
@@ -27,8 +26,6 @@ const photoSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "Post"
     }],
-}, { timestamps: { createdAt: 'created_at' }*/
-});
-
+}, { timestamps: { createdAt: 'created_at' } });
 
 module.exports = mongoose.model('Photo', photoSchema);

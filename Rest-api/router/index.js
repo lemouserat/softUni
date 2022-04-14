@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const users = require('./users');
-const photos = require('./photos');
+const photos = require('./photos')
 const posts = require('./posts');
 const likes = require('./likes');
 const test = require('./test');

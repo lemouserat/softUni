@@ -1,4 +1,4 @@
-const { photoModel  } = require('../models/photoModel');
+const { photoModel } = require('../models');
 const { newPost } = require('./postController')
 
 function getPhotos(req, res, next) {
@@ -22,31 +22,31 @@ function getPhoto(req, res, next) {
         .catch(next);
 }
 
-function addPhoto(req, res, next) {
+function createPhoto(req, res, next) {
     const { photoTitle, photoUrl, photoExif } = req.body;
     const { _id: userId } = req.user;
 
-    photoModel.create({ photoTitle, photoUrl, photoExif})
+    photoModel.create({ photoTitle, photoUrl, photoExif, userId, subscribers: [userId] })
         .then(photo => {
-            newPost(postText, userId, photo._id)
+            newPost(photoTitle, userId, photo._id)
                 .then(([_, updatedPhoto]) => res.status(200).json(updatedPhoto))
         })
         .catch(next);
 }
 
 function subscribe(req, res, next) {
-    const themeId = req.params.themeId;
+    const photoId = req.params.photoId;
     const { _id: userId } = req.user;
-    photoModel.findByIdAndUpdate({ _id: themeId }, { $addToSet: { subscribers: userId } }, { new: true })
-        .then(updatedTheme => {
-            res.status(200).json(updatedTheme)
+    themeModel.findByIdAndUpdate({ _id: photoId }, { $addToSet: { subscribers: userId } }, { new: true })
+        .then(updatedPhoto => {
+            res.status(200).json(updatedPhoto)
         })
         .catch(next);
 }
 
 module.exports = {
-    getPhotos,
-    addPhoto,
-    getPhoto,
     subscribe,
+    getPhotos,
+    createPhoto,
+    getPhoto
 }

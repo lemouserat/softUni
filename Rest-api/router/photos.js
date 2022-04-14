@@ -6,13 +6,13 @@ const { photoController, postController } = require('../controllers');
 // middleware that is specific to this router
 
 router.get('/', photoController.getPhotos);
-router.post('/', auth(), photoController.addPhoto);
+router.post('/', auth(), photoController.createPhoto);
 
 router.get('/:photoId', photoController.getPhoto);
-router.post('/:themeId', auth(), postController.createPost);
-//router.put('/:themeId', auth(), themeController.subscribe);
-router.put('/:themeId/posts/:postId', auth(), postController.editPost);
-router.delete('/:themeId/posts/:postId', auth(), postController.deletePost);
+router.post('/:photoId', auth(), postController.createPost);
+router.put('/:photoId', auth(), photoController.subscribe);
+router.put('/:photoId/posts/:postId', auth(), postController.editPost);
+router.delete('/:photoId/posts/:postId', auth(), postController.deletePost);
 
 // router.get('/my-trips/:id/reservations', auth(), themeController.getReservations);
 

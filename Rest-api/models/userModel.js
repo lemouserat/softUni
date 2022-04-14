@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "Theme"
     }],
+    photos: [{
+        type: ObjectId,
+        ref: "Photo"
+    }],
     posts: [{
         type: ObjectId,
         ref: "Post"
