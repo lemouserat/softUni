@@ -1,0 +1,38 @@
+
+body {
+    margin: auto;
+    position: relative;
+    min-height: 100vh;
+    background-color: silver;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 4.5em;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+h2 {
+    text-align: center;
+    border-bottom: 1px dashed #999;
+}
+
+span {
+    font-weight: bold;
+}
+
+button {
+    background-color: #0c695a;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
