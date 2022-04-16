@@ -15,10 +15,7 @@
             </div>
           </div>
           <div class="subscribers">
-            <button *ngIf="(isLoggedIn$ | async)" [class.subscribe]="(canSubscribe$ | async)" [class.unsubscribe]="!(canSubscribe$ | async)">
-              {{(canSubscribe$ | async) ? 'Subscribe' : 'Unsubscribe'}}
-            </button>
-            <p>Subscribers: <span>{{photo.subscribers.length}}</span></p>
+            <p>Likes: <span>{{photo.subscribers.length}}</span></p>
           </div>
         </div>
       </div>
