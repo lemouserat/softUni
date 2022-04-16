@@ -36,7 +36,6 @@ export class PhotosNewPageComponent implements OnInit {
         console.error(error)
       }
     })
-
   }
 
   navigateToHome(){

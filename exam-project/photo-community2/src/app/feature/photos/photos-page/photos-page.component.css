@@ -1,14 +1,6 @@
-:host {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  main {
-    width: 100%;
-  }
-  
-  aside {
-    width: 30%;
-    margin-top: 1em;
-    font-size: 0.8em;
-  }
+.container {
+    display: grid;
+  grid-template-columns: 200px 200px 200px;
+  margin: 10px;
+  padding: 10px
+}

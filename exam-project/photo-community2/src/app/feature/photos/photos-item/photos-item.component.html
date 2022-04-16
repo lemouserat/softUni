@@ -1,4 +1,4 @@
-<div class="theme-container">
+<div class="photo-container">
     <div class="theme-name-wrapper">
       <div class="theme-name">
         <a [routerLink]="['/photos', photo._id]" class="normal">
@@ -15,8 +15,8 @@
             </div>
           </div>
           <div class="subscribers">
-            <button *ngIf="(isLoggedIn$ | async)" [class.subscribe]="canSubscribe" [class.unsubscribe]="!canSubscribe">
-              {{ canSubscribe ? 'Subscribe' : 'Unsubscribe' }}
+            <button *ngIf="(isLoggedIn$ | async)" [class.subscribe]="(canSubscribe$ | async)" [class.unsubscribe]="!(canSubscribe$ | async)">
+              {{(canSubscribe$ | async) ? 'Subscribe' : 'Unsubscribe'}}
             </button>
             <p>Subscribers: <span>{{photo.subscribers.length}}</span></p>
           </div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, Observable } from 'rxjs';
+import { mergeMap, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth.service';
-import { IPost } from 'src/app/core/interfaces';
+import { IPost, IUser } from 'src/app/core/interfaces';
 import { IPhoto } from 'src/app/core/interfaces/photo';
 import { PhotoService } from 'src/app/core/photo.service';
 
@@ -16,24 +17,75 @@ export class PhotosDetailPageComponent implements OnInit {
   photo: IPhoto<IPost>
 
   canSubscribe: boolean = false
+  currentUser?: IUser
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
+  
 
   constructor(private activatedRoute: ActivatedRoute,
     private photoService: PhotoService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      const photoId = params['photoId'];
-      this.photoService.loadPhotoById(photoId).subscribe(photo => {
+    combineLatest([
+      this.activatedRoute.params
+        .pipe(
+          mergeMap(params => {
+            const photoId = params['photoId'];
+            return this.photoService.loadPhotoById(photoId)
+          })),
+          this.authService.currentUser$.pipe(
+            tap(currentUser => 
+            this.currentUser = this.currentUser))
+    ])
+.subscribe(([photo, user]) => {
         this.photo = photo;
-        this.canSubscribe = !this.photo.subscribers.includes('5fa64b162183ce1728ff371d')
+        this.canSubscribe = user && !this.photo.subscribers.includes(user?._id)
       })
-    })
   }
 
   canLike(comment: IPost){
-    return !comment.likes.includes('5fa64b162183ce1728ff371d')
+    return this.currentUser && !comment.likes.includes(this.currentUser._id)
+  }
+
+  subscribe(){
+    this.photoService.subscribeToPhoto(this.photo._id)
+    .pipe(
+      mergeMap(() => {
+        return this.photoService.loadPhotoById(this.photo._id)
+      })
+    )
+    .subscribe(newPhoto => {
+      this.photo = newPhoto;
+      this.canSubscribe = false
+
+    })
+  }
+
+  unsubscribe(){
+    this.photoService.unsubscribeToPhoto(this.photo._id)
+    .pipe(
+      mergeMap(() => {
+        return this.photoService.loadPhotoById(this.photo._id)
+      })
+    )
+    .subscribe(newPhoto => {
+      this.photo = newPhoto;
+      this.canSubscribe = true
+
+    })
+  }
+
+  deletePhoto(){
+    console.log('this is the photo id' + this.photo._id);
+    this.photoService.deletePhotoItem(this.photo._id).subscribe({
+      next: (photo) => {
+        this.router.navigate(['/photos'])
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
   }
 
 }

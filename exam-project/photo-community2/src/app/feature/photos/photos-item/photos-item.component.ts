@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth.service';
 import { IPhoto } from 'src/app/core/interfaces/photo';
 
@@ -11,14 +12,22 @@ import { IPhoto } from 'src/app/core/interfaces/photo';
 export class PhotosItemComponent implements OnChanges {
 
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
-  canSubscribe: boolean = false;
+  //canSubscribe: boolean = false;
+  canSubscribe$: Observable<boolean>
 
   @Input() photo: IPhoto
 
   constructor(private authService: AuthService) { }
 
   ngOnChanges(): void {
-    this.canSubscribe = !this.photo.subscribers.includes('5fa64b162183ce1728ff371d');
+    //this.canSubscribe = !this.photo.subscribers.includes('5fa64b162183ce1728ff371d');
+    this.canSubscribe$ = this.authService.currentUser$.pipe(map((currentUser) => {
+      if(!currentUser || !this.photo) {
+        return false;
+      }
+
+      return !this.photo.subscribers.includes(currentUser._id)
+    }))
   }
 
 }

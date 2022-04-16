@@ -24,9 +24,8 @@ export class RegisterComponent implements OnInit {
     'passwords': new FormGroup({
       'password': this.passwordControl,
       'rePassword': new FormControl(null, [passwordMatch(this.passwordControl)]),
-    }),
-    'tel': new FormControl(''),
-    'telRegion': new FormControl('')
+    })
+
   })
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
@@ -39,7 +38,7 @@ export class RegisterComponent implements OnInit {
   }
 
   handleRegister(): void {
-    const { username, email, passwords, tel, telRegion } = this.registerFormGroup.value;
+    const { username, email, passwords } = this.registerFormGroup.value;
 
     const body: CreateUserDto = {
       username: username,
@@ -48,9 +47,6 @@ export class RegisterComponent implements OnInit {
       // ...(tel && { tel: telRegion + tel})
     }
 
-    if (tel) {
-      body.tel = telRegion + tel;
-    }
 
     this.authService.register$(body).subscribe(() => {
       this.router.navigate(['/home']);

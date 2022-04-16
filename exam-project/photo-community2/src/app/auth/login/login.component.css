@@ -2,7 +2,7 @@
 
 form.login, form.register {
     width: 40%;
-    margin: 2em auto 0;
+    margin: auto;
     text-align: center;
 }
 

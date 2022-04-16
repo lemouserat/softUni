@@ -5,6 +5,7 @@ const {
 
 const utils = require('../utils');
 const { authCookieName } = require('../app-config');
+const { uploadFile } = require('../utils/disk');
 
 const bsonToJson = (data) => { return JSON.parse(JSON.stringify(data)) };
 const removePassword = (data) => {
@@ -13,9 +14,9 @@ const removePassword = (data) => {
 }
 
 function register(req, res, next) {
-    const { tel, email, username, password, repeatPassword } = req.body;
+    const {email, username, password, repeatPassword } = req.body;
 
-    return userModel.create({ tel, email, username, password })
+    return userModel.create({email, username, password })
         .then((createdUser) => {
             createdUser = bsonToJson(createdUser);
             createdUser = removePassword(createdUser);
@@ -94,11 +95,26 @@ function getProfileInfo(req, res, next) {
 
 function editProfileInfo(req, res, next) {
     const { _id: userId } = req.user;
-    const { tel, username, email } = req.body;
+    const { username, email } = req.fields;
 
-    userModel.findOneAndUpdate({ _id: userId }, { tel, username, email }, { runValidators: true, new: true })
-        .then(x => { res.status(200).json(x) })
+    const newProfilePicture = req.files.profilePicture;
+    if(newProfilePicture){
+        uploadFile(newProfilePicture).then(id => {
+            console.log(`This is the id ${id}`)
+            const profilePicture = `https://drive.google.com/uc?id=${id}`
+         return   userModel.findOneAndUpdate(
+                { _id: userId }, 
+                { username, email, profilePicture }, 
+                { runValidators: true, new: true })
+        }).then(x => { res.status(200).json(x) })
         .catch(next);
+    } else {
+        userModel.findOneAndUpdate({ _id: userId }, { username, email }, { runValidators: true, new: true })
+        .then(x => { res.status(200).json(x) })
+         .catch(next);
+    }
+
+
 }
 
 module.exports = {

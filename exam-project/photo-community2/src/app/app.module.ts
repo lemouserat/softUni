@@ -11,6 +11,12 @@ import { PagesModule } from './feature/pages/pages.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth.service';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer, currentUserReducer, IRootState } from './+store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +29,16 @@ import { AuthService } from './auth.service';
     RouterModule,
     CoreModule.forRoot(),
     PagesModule,
+    AuthModule,
+    StoreModule.forRoot<IRootState>({
+      counter: counterReducer,
+      currentUser: currentUserReducer,
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot([])
   ],
   providers: [
     {

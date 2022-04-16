@@ -1,14 +1,24 @@
+.photo-container {
+  padding: 20px;
+  min-width: 200px;
+}
 
-.theme-container a {
+img {
+  max-width: 150px;
+  align-content: center;
+}
+
+
+.photo-container a {
   text-decoration: none;
   color: inherit;
 }
 
-.theme-container span {
+.photo-container span {
   font-weight: bold;
 }
 
-.theme-container h2, p {
+.photo-container h2, p {
   padding: 0.3em 0 0.2em;
   margin: 0;
 }
@@ -22,6 +32,7 @@
   border-radius: 0.3em;
   font-size: 0.8em;
   margin-top: 1em;
+
 }
 
 .theme-title {

@@ -18,7 +18,7 @@ export class PhotoService {
   }
 
   loadPhotoById(id: string): Observable<IPhoto<IPost>> {
-    return this.http.get<IPhoto<IPost>>(`${apiUrl}/photos/${id}`)
+    return this.http.get<IPhoto<IPost>>(`${apiUrl}/photos/${id}`, {withCredentials: true})
   }
 
   loadPhotoList(searchTerm: string = ''): Observable<IPhoto[]> {
@@ -29,6 +29,18 @@ export class PhotoService {
         }
       })
     })
+  }
+
+  subscribeToPhoto(photoId: string): Observable<IPhoto>{
+    return this.http.put<IPhoto>(`${apiUrl}/photos/${photoId}`, {}, {withCredentials: true})
+  }
+
+  unsubscribeToPhoto(photoId: string): Observable<IPhoto>{
+    return this.http.put<IPhoto>(`${apiUrl}/photos/${photoId}/unsubscribe`, {}, {withCredentials: true})
+  }
+
+  deletePhotoItem(id: string): Observable<IPhoto<IPost>> {
+    return this.http.delete<IPhoto<IPost>>(`${apiUrl}/photos/${id}`, {withCredentials: true})
   }
 
 

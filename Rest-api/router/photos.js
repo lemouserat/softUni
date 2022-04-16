@@ -7,10 +7,12 @@ const { photoController, postController } = require('../controllers');
 
 router.get('/', photoController.getPhotos);
 router.post('/', auth(), photoController.createPhoto);
-
+router.delete('/:photoId', auth(), photoController.deletePhoto);
 router.get('/:photoId', photoController.getPhoto);
 router.post('/:photoId', auth(), postController.createPost);
+
 router.put('/:photoId', auth(), photoController.subscribe);
+router.put('/:photoId/unsubscribe', auth(), photoController.unsubscribe)
 router.put('/:photoId/posts/:postId', auth(), postController.editPost);
 router.delete('/:photoId/posts/:postId', auth(), postController.deletePost);
 
