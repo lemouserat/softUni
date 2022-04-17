@@ -6,7 +6,7 @@
   }
   
     .err {
-      color: #95c2de;
+      color: #14775e;
       font-family: 'Nunito Sans', sans-serif;
       font-size: 11rem;
       position:absolute;
@@ -19,17 +19,10 @@
     font-size: 8.5rem;
     left: 42%;
     top: 15%;
-    color: #95c2de;
+    color: #14775e;
   }
   
-   .err2 {
-      color: #95c2de;
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 11rem;
-      position:absolute;
-      left: 68%;
-      top: 8%;
-    }
+
   
   .msg {
       text-align: center;
@@ -43,7 +36,7 @@
   
   a {
     text-decoration: none;
-    color: #95c2de;
+    color: #14775e;
   }
   
   a:hover {

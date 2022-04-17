@@ -7,11 +7,11 @@
             <label for="photoTitle">Title <span class="red">*</span></label>
             <input #photoTitle="ngModel" ngModel type="text" name="photoTitle" id="photoTitle" required minlength="5">
 
-            <ng-container >
-                <p >
+            <ng-container *ngIf="photoTitle.touched && photoTitle.invalid" >
+                <p *ngIf="photoTitle.errors.required" class="error">
                     Photo title is required.
                 </p>
-                <p >
+                <p *ngIf="photoTitle.errors.minlength" class="error">
                     Photo title must be at least 5 characters long.
                 </p>
             </ng-container>
@@ -21,31 +21,22 @@
             <label for="photoUrl">URL <span class="red">*</span></label>
             <input #photoUrl="ngModel"  ngModel type="text" name="photoUrl" id="photoUrl" required minlength="5">
 
-            <ng-container >
-                <p >
+            <ng-container *ngIf="photoUrl.touched && photoUrl.invalid">
+                <p *ngIf="photoUrl.errors.required" class="error">
                     Photo URL is required.
                 </p>
-                <p >
-                    Photo URL must be at least 5 characters long.
-                </p>
+
             </ng-container>
 
         </div>
-        <div class="new-theme-content">
+        <div class="new-photo-exif">
             <label for="photoExif">EXIF information <span class="red">*</span></label>
-            <textarea type="text" name="photoExif" #photoExif="ngModel" ngModel id="photoExif" rows="8" class="height" required minlength="10"></textarea>
-            <ng-container >
-                <p >
-                    The field with your post is required.
-                </p>
-                <p >
-                    Post must be at least 10 characters long.
-                </p>
-            </ng-container>
+            <textarea type="text" name="photoExif" #photoExif="ngModel" ngModel id="photoExif" rows="5" class="height" ></textarea>
+
         </div>
         <div class="new-theme-buttons">
             <button type="button" (click)="navigateToHome()"  class="cancel">Cancel</button>
-            <button   class="public">Post</button>
+            <button  class="public">Publish</button>
         </div>
 
     </form>

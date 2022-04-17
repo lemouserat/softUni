@@ -12,7 +12,6 @@ const photoSchema = new mongoose.Schema({
     },
     photoExif: {
         type: String,
-        required: true
     },
     subscribers: [{
         type: ObjectId,

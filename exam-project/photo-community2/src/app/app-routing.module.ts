@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./core/guards/auth.guard";
 import { BazarPageComponent } from "./feature/bazar/bazar-page/bazar-page.component";
 import { BazarModule } from "./feature/bazar/bazar.module";
 import { HomePageComponent } from "./feature/pages/home-page/home-page.component";
@@ -21,6 +22,7 @@ const routes: Routes = [
     },
     {
         path: 'photos',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./feature/photos/photos.module').then(m => m.PhotosModule)
     },
     {

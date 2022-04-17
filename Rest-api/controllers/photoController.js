@@ -1,4 +1,4 @@
-const { photoModel, userModel } = require('../models');
+const { photoModel, userModel} = require('../models');
 const { newPost } = require('./postController')
 
 function getPhotos(req, res, next) {
@@ -10,7 +10,7 @@ function getPhotos(req, res, next) {
 
 function getTopPhotos(req, res, next){    
 
-    photoModel.find().sort({"subscribers":-1}).populate('userId')
+    photoModel.find().sort({"subscribers":-1}).limit(3).populate('userId')
     .then(photos => res.json(photos))
     .catch(next);
 
@@ -34,11 +34,8 @@ function createPhoto(req, res, next) {
     const { photoTitle, photoUrl, photoExif } = req.body;
     const { _id: userId } = req.user;
 
-    photoModel.create({ photoTitle, photoUrl, photoExif, userId, subscribers: [userId] })
-        .then(photo => {
-            newPost(photoTitle, userId, photo._id)
-                .then(([_, updatedPhoto]) => res.status(200).json(updatedPhoto))
-        })
+    photoModel.create({ photoTitle, photoUrl, photoExif, userId })
+        .then(photo =>  res.json(photo))
         .catch(next);
 }
 

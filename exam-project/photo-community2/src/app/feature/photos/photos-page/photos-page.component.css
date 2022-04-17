@@ -4,3 +4,10 @@
   margin: 10px;
   padding: 10px
 }
+
+:host {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+
+}

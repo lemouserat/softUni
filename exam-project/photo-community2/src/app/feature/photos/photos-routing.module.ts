@@ -14,12 +14,12 @@ const routes: Routes = [
     },
     {
         path: 'new',
-        // TODO stoimenovg: uncomment below.
         canActivate: [AuthGuard],
         component: PhotosNewPageComponent,
     },
     {
         path: ':photoId',
+        canActivate: [AuthGuard],
         component: PhotosDetailPageComponent,
     },
 

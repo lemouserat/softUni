@@ -1,19 +1,21 @@
 
-
 .photo-container {
   padding: 20px;
   min-width: 200px;
+  align-content: center;
 }
 
 img {
-  max-width: 150px;
+  max-width: 340px;
   align-content: center;
+  margin-left: auto;
 }
 
 
 .photo-container a {
   text-decoration: none;
   color: inherit;
+  align-content: center;
 }
 
 .photo-container span {
@@ -34,7 +36,6 @@ img {
   border-radius: 0.3em;
   font-size: 0.8em;
   margin-top: 1em;
-
 }
 
 .theme-title {
@@ -46,7 +47,6 @@ img {
 }
 
 .columns {
-
   justify-content: space-between;
   margin-top: 0.7rem;
 }
@@ -54,24 +54,9 @@ img {
 .subscribers {
   text-align: right;
   flex-basis: 25%;
+  font-size: large;
 }
 
-.subscribers button {
-  padding: 0.2rem 0.5rem;
-  border: none;
-  border-radius: 0.3rem;
-  color: white;
-  cursor: pointer;
-  width: 80%;
-}
-
-.subscribe {
-  background-color: green;
-}
-
-.unsubscribe {
-  background-color: red;
-}
 
 time {
   font-weight: bold;
