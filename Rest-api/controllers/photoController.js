@@ -8,6 +8,14 @@ function getPhotos(req, res, next) {
         .catch(next);
 }
 
+function getTopPhotos(req, res, next){    
+
+    photoModel.find().sort({"subscribers":-1}).populate('userId')
+    .then(photos => res.json(photos))
+    .catch(next);
+
+}
+
 function getPhoto(req, res, next) {
     const { photoId } = req.params;
 
@@ -78,5 +86,6 @@ module.exports = {
     createPhoto,
     getPhoto,
     unsubscribe,
-    deletePhoto
+    deletePhoto,
+    getTopPhotos
 }

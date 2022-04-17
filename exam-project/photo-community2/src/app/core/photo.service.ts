@@ -31,6 +31,11 @@ export class PhotoService {
     })
   }
 
+  loadTopPhotoList(): Observable<IPhoto[]>{
+    return this.http.get<IPhoto[]>(`${apiUrl}/photos/top`)
+
+  }
+
   subscribeToPhoto(photoId: string): Observable<IPhoto>{
     return this.http.put<IPhoto>(`${apiUrl}/photos/${photoId}`, {}, {withCredentials: true})
   }

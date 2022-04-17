@@ -18,9 +18,11 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
+   
   ],
   imports: [
     BrowserModule,

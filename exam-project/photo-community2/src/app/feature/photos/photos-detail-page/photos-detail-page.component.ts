@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
@@ -15,6 +15,7 @@ import { PhotoService } from 'src/app/core/photo.service';
 export class PhotosDetailPageComponent implements OnInit {
 
   photo: IPhoto<IPost>
+  //@Input() photo: IPhoto<IPost>
 
   canSubscribe: boolean = false
   currentUser?: IUser
@@ -41,7 +42,17 @@ export class PhotosDetailPageComponent implements OnInit {
 .subscribe(([photo, user]) => {
         this.photo = photo;
         this.canSubscribe = user && !this.photo.subscribers.includes(user?._id)
+        console.log('try user ' + photo)
+        console.log('try photo ' + photo.userId.username)
+        console.log('try photo ' + photo.photoTitle)
+        console.log('try photo ' + photo.userId.username)
+        console.log('try photo ' + this.photo.userId.username)
+
       })
+  }
+
+  getUsernameFromPhoto(photo){
+    
   }
 
   canLike(comment: IPost){

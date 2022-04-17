@@ -1,7 +1,6 @@
 :host {
     width: 100%;
 }
-/* theme content  */
 
 .theme-content {
     display: flex;
@@ -9,10 +8,6 @@
     width: 50%;
     margin: auto;
 }
-
-/* theme title  */
-
-/* theme title  */
 
 .theme-name-wrapper {
     display: flex;
