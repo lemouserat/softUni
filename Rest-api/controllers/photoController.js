@@ -2,15 +2,30 @@ const { photoModel, userModel} = require('../models');
 const { newPost } = require('./postController')
 
 function getPhotos(req, res, next) {
-    photoModel.find()
+    const title = req.query.title || '';
+    photoModel.find({photoTitle: {$regex: title, $options: 'i'}})
         .populate('userId')
         .then(photos => res.json(photos))
         .catch(next);
 }
 
-function getTopPhotos(req, res, next){    
+function getPhotosList(req, res, next){
+    const title = req.query.title || '';
+    const startIndex = +req.query.startIndex || 0;
+    const limit = +req.query.limit || Number.MAX_SAFE_INTEGER;
 
-    photoModel.find().sort({"subscribers":-1}).limit(3).populate('userId')
+    Promise.all([
+        photoModel.find({photoTitle: {$regex: title, $options: 'i'}})
+            .skip(startIndex)
+            .limit(limit)
+            .populate('userId'),
+            photoModel.find({photoTitle: {$regex: title, $options: 'i'}}).countDocuments()
+    ])
+        .then(([results, totalResults]) => res.json({results, totalResults})).catch(next)
+}
+
+function getTopPhotos(req, res, next){    
+    photoModel.find().sort({"subscribers": -1}).populate('userId')
     .then(photos => res.json(photos))
     .catch(next);
 
@@ -31,10 +46,10 @@ function getPhoto(req, res, next) {
 }
 
 function createPhoto(req, res, next) {
-    const { photoTitle, photoUrl, photoExif } = req.body;
+    const { photoTitle, photoUrl, photoExif, photoGenre } = req.body;
     const { _id: userId } = req.user;
 
-    photoModel.create({ photoTitle, photoUrl, photoExif, userId })
+    photoModel.create({ photoTitle, photoUrl, photoGenre, photoExif, userId })
         .then(photo =>  res.json(photo))
         .catch(next);
 }
@@ -84,5 +99,6 @@ module.exports = {
     getPhoto,
     unsubscribe,
     deletePhoto,
-    getTopPhotos
+    getTopPhotos,
+    getPhotosList
 }

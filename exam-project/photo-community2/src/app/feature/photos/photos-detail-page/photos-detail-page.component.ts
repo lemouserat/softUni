@@ -14,11 +14,12 @@ import { PhotoService } from 'src/app/core/photo.service';
 })
 export class PhotosDetailPageComponent implements OnInit {
 
-  photo: IPhoto<IPost>
+  photo: IPhoto<IPost, string>
   //@Input() photo: IPhoto<IPost>
 
   canSubscribe: boolean = false
   currentUser?: IUser
+  isUserOwner: boolean = false
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   
 
@@ -40,13 +41,11 @@ export class PhotosDetailPageComponent implements OnInit {
             this.currentUser = this.currentUser))
     ])
 .subscribe(([photo, user]) => {
+        this.currentUser = user
         this.photo = photo;
         this.canSubscribe = user && !this.photo.subscribers.includes(user?._id)
-        console.log('try user ' + photo)
-        console.log('try photo ' + photo.userId.username)
-        console.log('try photo ' + photo.photoTitle)
-        console.log('try photo ' + photo.userId.username)
-        console.log('try photo ' + this.photo.userId.username)
+        this.isUserOwner = user && this.photo.userId === user._id
+
 
       })
   }

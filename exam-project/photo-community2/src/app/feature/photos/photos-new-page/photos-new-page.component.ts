@@ -16,7 +16,8 @@ export class PhotosNewPageComponent implements OnInit {
     {
       photoTitle: new FormControl(''),
       photoUrl: new FormControl(''),
-      photoExif: new FormControl('')
+      photoExif: new FormControl(''),
+      photoGenre: new FormControl('')
   }
   ) 
 

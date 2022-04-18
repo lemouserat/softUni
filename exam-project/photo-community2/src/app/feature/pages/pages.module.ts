@@ -4,11 +4,13 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PageNotFoundPageComponent } from './page-not-found-page/page-not-found-page.component';
 import { RouterModule } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     HomePageComponent,
-    PageNotFoundPageComponent
+    PageNotFoundPageComponent,
+    AboutComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,11 @@ import { IPhoto } from './interfaces/photo';
 
 const apiUrl = environment.apiUrl;
 
+export interface PaginatedResponse<T> {
+  results: T[];
+  totalResults: number;
+}
+
 @Injectable()
 export class PhotoService {
 
@@ -17,15 +22,17 @@ export class PhotoService {
     return this.http.post<IPhoto>(`${apiUrl}/photos`, body, { withCredentials: true });
   }
 
-  loadPhotoById(id: string): Observable<IPhoto<IPost>> {
-    return this.http.get<IPhoto<IPost>>(`${apiUrl}/photos/${id}`, {withCredentials: true})
+  loadPhotoList(searchTerm: string = ''): Observable<IPhoto[]> {
+    return this.http.get<IPhoto[]>(`${apiUrl}/photos?title=${searchTerm}`, {})
   }
 
-  loadPhotoList(searchTerm: string = ''): Observable<IPhoto[]> {
-    return this.http.get<IPhoto[]>(`${apiUrl}/photos?title=${searchTerm}`, {
+  loadPhotoPaginatedList(searchTerm: string = '', startIndex: number, limit: number): Observable<PaginatedResponse<IPhoto>> {
+    return this.http.get<PaginatedResponse<IPhoto>>(`${apiUrl}/photos/list`, {
       params: new HttpParams({
         fromObject: {
-          
+          title: searchTerm,
+          startIndex,
+          limit
         }
       })
     })
@@ -33,7 +40,10 @@ export class PhotoService {
 
   loadTopPhotoList(): Observable<IPhoto[]>{
     return this.http.get<IPhoto[]>(`${apiUrl}/photos/top`)
+  }
 
+  loadPhotoById(id: string): Observable<IPhoto<IPost, string>> {
+    return this.http.get<IPhoto<IPost, string>>(`${apiUrl}/photos/${id}`, {withCredentials: true})
   }
 
   subscribeToPhoto(photoId: string): Observable<IPhoto>{
@@ -44,8 +54,8 @@ export class PhotoService {
     return this.http.put<IPhoto>(`${apiUrl}/photos/${photoId}/unsubscribe`, {}, {withCredentials: true})
   }
 
-  deletePhotoItem(id: string): Observable<IPhoto<IPost>> {
-    return this.http.delete<IPhoto<IPost>>(`${apiUrl}/photos/${id}`, {withCredentials: true})
+  deletePhotoItem(id: string): Observable<IPhoto<IPost, string>> {
+    return this.http.delete<IPhoto<IPost, string>>(`${apiUrl}/photos/${id}`, {withCredentials: true})
   }
 
 

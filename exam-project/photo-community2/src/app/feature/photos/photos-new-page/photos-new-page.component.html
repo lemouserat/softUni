@@ -25,12 +25,24 @@
                 <p *ngIf="photoUrl.errors.required" class="error">
                     Photo URL is required.
                 </p>
-
             </ng-container>
-
+        </div>
+        <div class="new-photo-genre">
+            <label for="photoGenre">Genre <span class="red">*</span></label>
+            <select #photoGenre="ngModel" ngModel name="photoGenre" id="photoGenre" required>
+                <option value="Nature">Nature</option>
+                <option value="Portrait">Portrait</option>
+                <option value="Sport">Sport</option>
+                <option value="Concert">Concert</option>
+            </select>
+            <ng-container *ngIf="photoGenre.touched && photoGenre.invalid">
+                <p *ngIf="photoGenre.errors.required" class="error">
+                    Photo genre is required.
+                </p>
+            </ng-container>
         </div>
         <div class="new-photo-exif">
-            <label for="photoExif">EXIF information <span class="red">*</span></label>
+            <label for="photoExif">EXIF information <span class="red"></span></label>
             <textarea type="text" name="photoExif" #photoExif="ngModel" ngModel id="photoExif" rows="5" class="height" ></textarea>
 
         </div>

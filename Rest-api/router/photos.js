@@ -6,6 +6,7 @@ const { photoController, postController } = require('../controllers');
 // middleware that is specific to this router
 
 router.get('/', photoController.getPhotos);
+router.get('/list', photoController.getPhotosList);
 router.get('/top', photoController.getTopPhotos);
 router.post('/', auth(), photoController.createPhoto);
 router.delete('/:photoId', auth(), photoController.deletePhoto);

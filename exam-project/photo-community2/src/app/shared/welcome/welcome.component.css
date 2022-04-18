@@ -6,19 +6,22 @@
     border-radius: 0.3em;
     font-size: 0.8em;
     margin-top: 1em;
+    
 }
 
 .welcome h3 {
     background-color: rgb(13, 109, 104);
     border-radius: 0.3em;
-    width: 100%;
+    width: 98%;
     padding: 0.3em 1em;
+    color: white;
 }
 
 .welcome p {
     padding: 1em;
     border-bottom: 1px solid #999;
     font-style: normal;
+    
 }
 
 .welcome a {

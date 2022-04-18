@@ -13,6 +13,10 @@ const photoSchema = new mongoose.Schema({
     photoExif: {
         type: String,
     },
+    photoGenre: {
+        type: String,
+        required: true
+    },
     subscribers: [{
         type: ObjectId,
         ref: "User"
