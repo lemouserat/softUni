@@ -42,7 +42,7 @@ export class PhotosTopListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('View was initialized');
+    //console.log('View was initialized');
 
   }
 

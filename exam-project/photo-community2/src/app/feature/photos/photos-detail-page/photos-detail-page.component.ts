@@ -87,7 +87,7 @@ export class PhotosDetailPageComponent implements OnInit {
   }
 
   deletePhoto(){
-    console.log('this is the photo id' + this.photo._id);
+    //console.log('this is the photo id' + this.photo._id);
     this.photoService.deletePhotoItem(this.photo._id).subscribe({
       next: (photo) => {
         this.router.navigate(['/photos'])

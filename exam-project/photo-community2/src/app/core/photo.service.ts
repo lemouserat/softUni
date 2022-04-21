@@ -18,7 +18,7 @@ export class PhotoService {
   constructor(private http: HttpClient) { }
 
   addPhoto$(body: { photoTitle: string, photoUrl: string, photoExif: string }): Observable<IPhoto> {
-    console.log('this is body' + body)
+    //console.log('this is body' + body)
     return this.http.post<IPhoto>(`${apiUrl}/photos`, body, { withCredentials: true });
   }
 

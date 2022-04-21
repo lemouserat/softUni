@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           // localhost:3000/api/login || localhost:3000/register
           if (event.url.endsWith('login') || event.url.endsWith('register')) {
-            console.log('login/register happened');
+            //console.log('login/register happened');
             const newlyLoggedUser: IUser = event.body;
             this.authService.handleLogin(newlyLoggedUser);
           } else if (event.url.endsWith('logout')) {

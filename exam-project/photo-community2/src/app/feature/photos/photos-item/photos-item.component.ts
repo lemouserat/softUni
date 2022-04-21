@@ -20,7 +20,7 @@ export class PhotosItemComponent implements OnChanges {
   constructor(private authService: AuthService) { }
 
   ngOnChanges(): void {
-    console.log('from photos-item ' + this.photo.userId.username)
+    //console.log('from photos-item ' + this.photo.userId.username)
     //this.canSubscribe = !this.photo.subscribers.includes('5fa64b162183ce1728ff371d');
     this.canSubscribe$ = this.authService.currentUser$.pipe(map((currentUser) => {
       if(!currentUser || !this.photo) {

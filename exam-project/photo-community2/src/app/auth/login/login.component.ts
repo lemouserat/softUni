@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         this.messageBus.notifyForMessage({ text: 'User successfully logged in!', type: MessageType.Success })
       },
       complete: () => {
-        console.log('login stream completed')
+        //console.log('login stream completed')
       },
       error: (err) => {
         this.errorMessage = err.error.message;

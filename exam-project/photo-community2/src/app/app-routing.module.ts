@@ -1,5 +1,7 @@
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./core/guards/auth.guard";
+import { BazarItemDetailsComponent } from "./feature/bazar/bazar-item-details/bazar-item-details.component";
+import { BazarNewOfferComponent } from "./feature/bazar/bazar-new-offer/bazar-new-offer.component";
 import { BazarPageComponent } from "./feature/bazar/bazar-page/bazar-page.component";
 import { BazarModule } from "./feature/bazar/bazar.module";
 import { AboutComponent } from "./feature/pages/about/about.component";
@@ -27,8 +29,14 @@ const routes: Routes = [
         loadChildren: () => import('./feature/photos/photos.module').then(m => m.PhotosModule)
     },
     {
-        path: 'bazar',
+        path: 'offers',
+        canActivate: [AuthGuard],
         component: BazarPageComponent
+    },
+    {
+        path: 'add-offer',
+        canActivate: [AuthGuard],
+        component: BazarNewOfferComponent
     },
     {
         path: 'top-photos',

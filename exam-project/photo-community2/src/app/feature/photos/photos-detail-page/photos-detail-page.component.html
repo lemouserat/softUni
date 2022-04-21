@@ -13,7 +13,7 @@
             </div>
             <div class="subscribers">
                 <ng-container *ngIf="(isLoggedIn$ | async)">
-                    <button  (click)="subscribe()" *ngIf="canSubscribe && !isUserOwner" class="subscribe">Vote</button>
+                    <button  (click)="subscribe()" *ngIf="canSubscribe" class="subscribe">Vote</button>
                     <button  (click)="unsubscribe()" *ngIf="!canSubscribe && !isUserOwner" class="unsubscribe">Remove vote</button>
                     <button *ngIf="isUserOwner" (click)="deletePhoto()" class="unsubscribe">Delete photo</button>
                 </ng-container>

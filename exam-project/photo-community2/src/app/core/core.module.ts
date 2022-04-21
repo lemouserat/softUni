@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 import { PhotoService } from './photo.service';
+import { OfferService } from './offer.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ export class CoreModule {
       providers: [
         UserService,
         PhotoService,
+        OfferService,
         storageServiceProvider,
         PostService,
         {

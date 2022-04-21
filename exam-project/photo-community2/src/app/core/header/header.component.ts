@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.messageBus.onNewMessage$.subscribe(newMessage => {
-      console.log('onNewMessage$.subscribe', newMessage);
+      //console.log('onNewMessage$.subscribe', newMessage);
       this.message = newMessage?.text || '';
       this.isMessageError = newMessage?.type === MessageType.Error;
 
@@ -51,11 +51,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     this.isLoggingOut = true;
-    console.log('logout called');
+    //console.log('logout called');
 
     this.authService.logout$().subscribe({
       next: args => {
-        console.log(args);
+        //console.log(args);
       },
       complete: () => {
         this.isLoggingOut = false;

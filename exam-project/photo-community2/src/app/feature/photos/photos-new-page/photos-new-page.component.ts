@@ -28,7 +28,7 @@ export class PhotosNewPageComponent implements OnInit {
   }
 
   submitNewPhoto(addphotoForm: NgForm): void {
-    console.log(addphotoForm.value);
+    //console.log(addphotoForm.value);
     this.photoService.addPhoto$(addphotoForm.value).subscribe({
       next: (photo) => {
         this.router.navigate(['/photos'])

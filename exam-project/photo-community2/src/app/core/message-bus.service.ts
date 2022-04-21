@@ -14,13 +14,13 @@ export enum MessageType {
 export class MessageBusService {
   private messageQueue$ = new Subject<Message>();
 
-  onNewMessage$ = this.messageQueue$.asObservable();
+  onNewMessage$ = this.messageQueue$.asObservable(); // taka se subskraibvam za messageQueue-a
 
   constructor() { }
 
   notifyForMessage(message: Message) {
     this.messageQueue$.next(message);
-  }
+  } // samo prez tozi metod mogat da se dobavqt novi syobshteniq
 
   clear(): void {
     this.messageQueue$.next(undefined);

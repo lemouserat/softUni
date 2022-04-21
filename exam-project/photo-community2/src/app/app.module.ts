@@ -15,6 +15,8 @@ import { counterReducer, currentUserReducer, IRootState } from './+store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { BazarModule } from './feature/bazar/bazar.module';
+import { OfferService } from './core/offer.service';
 
 
 
@@ -31,6 +33,7 @@ import { EffectsModule } from '@ngrx/effects';
     CoreModule.forRoot(),
     PagesModule,
     AuthModule,
+    BazarModule,
     StoreModule.forRoot<IRootState>({
       counter: counterReducer,
       currentUser: currentUserReducer,
